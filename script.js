@@ -1,25 +1,35 @@
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({
-        behavior: 'smooth'
-    });
+// Typing effect for the Hero section
+const text = document.querySelector('.typing-text');
+const phrase = "Aspiring Cyber Security Professional | B.Tech CSE (DFCS)";
+let i = 0;
+
+function type() {
+    if (i < phrase.length) {
+        text.innerHTML += phrase.charAt(i);
+        i++;
+        setTimeout(type, 50);
+    }
 }
 
-// Simple animation on scroll
-const sections = document.querySelectorAll('.section');
-
+// Interactive Scroll Reveal
 window.addEventListener('scroll', () => {
-    sections.forEach(sec => {
-        const top = sec.getBoundingClientRect().top;
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
         if (top < window.innerHeight - 100) {
-            sec.style.opacity = 1;
-            sec.style.transform = "translateY(0)";
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
         }
     });
 });
 
-// Initial hidden state
-sections.forEach(sec => {
-    sec.style.opacity = 0;
-    sec.style.transform = "translateY(50px)";
-    sec.style.transition = "0.6s ease";
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    type();
+    // Fade in sections
+    document.querySelectorAll('section').forEach(s => {
+        s.style.opacity = "0";
+        s.style.transform = "translateY(20px)";
+        s.style.transition = "all 0.6s ease-out";
+    });
 });
